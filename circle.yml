@@ -24,6 +24,6 @@ database:
 
 test:
   minitest_globs:
-    - *test.rb
+    - test/**/*_test.rb
   post:
     - bundle exec rake setup --trace
