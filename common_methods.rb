@@ -1,11 +1,7 @@
 module CommonMethods
   def setup
-    @driver = if ENV['CIRCLECI']
-                Selenium::WebDriver.for :remote, :url => "http://localhost:4444/wd/hub", :desired_capabilities => :firefox
-              else
-                Selenium::WebDriver.for :firefox
-              end
-
+    
+    @driver = Selenium::WebDriver.for :firefox          
     @base_url = "http://caregeneral.net/"
     @accept_next_alert = true
     @driver.manage.timeouts.implicit_wait = 30
