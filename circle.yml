@@ -24,7 +24,7 @@ database:
 
 test:
   minitest_globs:
-    - test/**/*_test.rb
+    - selenium_web_driver/*_test.rb
   post:
     #- bundle exec rake setup --trace
-    #- bundle exec ruby success_login_test.rb
+    - bundle exec ruby success_login_test.rb
