@@ -22,15 +22,9 @@ database:
     # - cp config/database.yml.ci config/database.yml
     # - bundle exec rake db:create db:schema:load --trace
 
- test:
-   minitest_globs:
-     - selenium_web_driver/*_test.rb
-   post:
-     #- bundle exec rake setup --trace
-     - bundle exec ruby new_testing_test.rb
-
-#   Dir.glob("*/*_test.rb") do |my_test|
-#     - bundle exec ruby "#{my_tes}"
-#   end
-
-  
+test:
+  minitest_globs:
+    - selenium_web_driver/*_test.rb
+  post:
+    #- bundle exec rake setup --trace
+    - bundle exec ruby new_testing_test.rb
