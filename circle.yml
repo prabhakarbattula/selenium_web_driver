@@ -27,4 +27,4 @@ test:
     - selenium_web_driver/*_test.rb
   post:
     #- bundle exec rake setup --trace
-    - bundle exec ruby success_login_test.rb
+    - bundle exec ruby new_testing_test.rb
