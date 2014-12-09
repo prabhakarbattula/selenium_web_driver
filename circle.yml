@@ -36,7 +36,7 @@ database:
   test:
   override:
     - bundle exec ruby:
-        parallel: true
+        parallel: false
         files:
           #- spec/unit/sample.rb   # can be a direct path to file
           #- spec/**/*.rb          # or a glob (ruby globs)
