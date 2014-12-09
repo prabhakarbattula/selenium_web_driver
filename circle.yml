@@ -40,4 +40,5 @@ database:
         files:
           #- spec/unit/sample.rb   # can be a direct path to file
           #- spec/**/*.rb          # or a glob (ruby globs)
+           minitest_globs:
            - selenium_web_driver/*_test.rb
