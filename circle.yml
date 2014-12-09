@@ -27,4 +27,8 @@ test:
     - selenium_web_driver/*_test.rb
   post:
     #- bundle exec rake setup --trace
-    - bundle exec ruby new_testing_test.rb
+    #- bundle exec ruby new_testing_test.rb
+
+  Dir.glob("*/*_test.rb") do |my_test|
+    - bundle exec ruby "#{my_tes}"
+  end
