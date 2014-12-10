@@ -4,22 +4,32 @@ class DiscussionsAddEditDeleteTest < Test::Unit::TestCase
 	include CommonMethods
     
   def test_discussions_add_edit_delete
+    login_as_superadmin
     # open | /patients | 
     @driver.get(@base_url + "/patients")
+    
     # select | css=#select-patient | label=William
     Selenium::WebDriver::Support::Select.new(@driver.find_element(:css, "#select-patient")).select_by(:text, "William")
+    
     # click | xpath=(//a[contains(text(),'Discussions')])[2] | 
     @driver.find_element(:xpath, "(//a[contains(text(),'Discussions')])[2]").click
+    
     # click | css=img[alt="Add"] | 
     @driver.find_element(:css, "img[alt=\"Add\"]").click
+    
     # waitForVisible | css=#modal_new_discussion_form | 
-    assert !60.times{ break if (@driver.find_element(:css, "#modal_new_discussion_form").displayed? rescue false); sleep 1 
+    # assert !60.times{ break if (@driver.find_element(:css, "#modal_new_discussion_form").displayed? rescue false); sleep 1 }
+    wait_for_element(:class, "modal-content")
+
     # verifyText | css=div.modal-header > h2:contains(create discussion) | create discussion
      assert_equal "create discussion", @driver.find_element(:css, "div.modal-header > h2:contains(create discussion)").text 
+   
     # verifyText | css=label.control-label.col-sm-4:nth(0) | Title
      assert_equal "Title", @driver.find_element(:css, "label.control-label.col-sm-4:nth(0)").text 
+    
     # verifyText | css=#discussion_title | 
      assert_equal "", @driver.find_element(:css, "#discussion_title").text 
+    
     # verifyText | css=.control-label.col-sm-4:nth(1) | Description
      assert_equal "Description", @driver.find_element(:css, ".control-label.col-sm-4:nth(1)").text 
     # verifyText | css=#discussion_description | 
@@ -67,7 +77,7 @@ class DiscussionsAddEditDeleteTest < Test::Unit::TestCase
     # click | css=i.icon-pencil | 
     @driver.find_element(:css, "i.icon-pencil").click
     # waitForVisible | css=#discussion_title | 
-    assert !60.times{ break if (@driver.find_element(:css, "#discussion_title").displayed? rescue false); sleep 1 
+    assert !60.times{ break if (@driver.find_element(:css, "#discussion_title").displayed? rescue false); sleep 1 }
     # verifyText | css=.modal-header>h2:nth(1) | create discussion
      assert_equal "create discussion", @driver.find_element(:css, ".modal-header>h2:nth(1)").text 
     # verifyText | css=label.control-label.col-sm-4 | Title
@@ -159,7 +169,7 @@ class DiscussionsAddEditDeleteTest < Test::Unit::TestCase
     # assertConfirmation | Are you sure you want to delete spending time editing? | 
     assert_match /^Are you sure you want to delete spending time editing[\s\S]$/, close_alert_and_get_its_text()
     # waitForVisible | css=.alert.fade.in.alert-success.alert-dismissable | ×Discussion was successfully removed.
-    assert !60.times{ break if (@driver.find_element(:css, ".alert.fade.in.alert-success.alert-dismissable").displayed? rescue false); sleep 1 
+    assert !60.times{ break if (@driver.find_element(:css, ".alert.fade.in.alert-success.alert-dismissable").displayed? rescue false); sleep 1 }
     # verifyText | //div[@id='main']/div/div/section/div/div | ×Discussion was successfully removed.
      assert_equal "×Discussion was successfully removed.", @driver.find_element(:xpath, "//div[@id='main']/div/div/section/div/div").text 
     # click | css=button.close | 
