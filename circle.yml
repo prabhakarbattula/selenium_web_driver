@@ -28,4 +28,4 @@ test:
   post:
     #- bundle exec rake setup --trace
     - bundle exec ruby success_login_test.rb
-    - bundle exec allergies_add_edit_delete_test.rb
+    - bundle exec ruby allergies_add_edit_delete_test.rb
