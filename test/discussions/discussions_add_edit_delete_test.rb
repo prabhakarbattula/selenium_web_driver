@@ -3,7 +3,7 @@ require 'test_helper'
 class DiscussionsAddEditDeleteTest < Test::Unit::TestCase
 	include CommonMethods
 
-  def test_discussions_add_edit_delete
+  def discussions_add_edit_delete
     login_as_superadmin
     # open | /patients |
     @driver.get(@base_url + "/patients")
