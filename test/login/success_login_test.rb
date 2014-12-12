@@ -3,60 +3,42 @@ require 'test_helper'
 class SeleniumTestUnit03122014 < Test::Unit::TestCase
   include CommonMethods
 
-=begin
-      def setup
-        caps = Selenium::WebDriver::Remote::Capabilities.firefox
-        caps.version = "5"
-        caps.platform = :XP
-        caps[:name] = "Testing Selenium 2 with Ruby on Sauce"
-
-        @driver = Selenium::WebDriver.for(
-          :remote,
-          :url => "http://prabhakarbattul:212b9ccc-17d1-4c9c-8fe9-9d8257ad63b7@ondemand.saucelabs.com:80/wd/hub",
-          :desired_capabilities => caps)
-      end
-=end
-
-  def test_selenium_test_unit03122014
+  def test_verify_elements_on_login_screen
     @driver.get("http://caregeneral.net/login/")
-
     assert element_present?(:css, "a.logo.navbar-brand")
 
     assert_equal "ACCOUNT LOGIN", @driver.find_element(:css, "h1.page-title").text
 
-    assert_equal "", @driver.find_element(:id, "user_email").text
-
-    assert_equal "", @driver.find_element(:id, "user_password").text
-
-    assert_equal "Forgot Password", @driver.find_element(:link, "Forgot Password").text
-
-    assert_equal "Didn't receive unlock instructions?", @driver.find_element(:link, "Didn't receive unlock instructions?").text
-
-    assert_equal "Contact Us", @driver.find_element(:link, "Contact Us").text
-
+    assert_input_element_with_id_empty("user_email")
+    assert_input_element_with_id_empty("user_password")
+    assert_input_empty(id: "user_password")
     assert_equal "LOGIN", @driver.find_element(:css, "button.common-btn").text
-
     assert_equal "", @driver.find_element(:id, "badge-app-store").text
 
-    assert_equal "Text me the link", @driver.find_element(:link, "Text me the link").text
 
-    assert_equal "Privacy Policy", @driver.find_element(:link, "Privacy Policy").text
+    assert_link_with_text_present("Didn't receive unlock instructions?")
+    assert_link_with_text_present("Conact Us")
+    assert_link_with_text_present("Text me the link")
+    assert_link_with_text_present("Privacy Policy")
+    assert_link_with_text_present("Terms of Service")
+  end
 
-    assert_equal "Terms of Service", @driver.find_element(:link, "Terms of Service").text
+  def assert_input_element_with_id_empty(id)
+    assert_equal "", @driver.find_element(:id, id).text
+  end
 
-    @driver.find_element(:id, "user_email").clear
-    @driver.find_element(:id, "user_email").send_keys "prabhakar+superadmin@bigbinary.com"
-
-    @driver.find_element(:id, "user_password").clear
-    @driver.find_element(:id, "user_password").send_keys "welcome"
-
-    @driver.find_element(:css, "button.common-btn").click
-
-    wait_for_element(:css, "span.user_name")
-
+  def test_login_success
+    login_to_site("prabhakar+superadmin@bigbinary.com", "welcome")
     assert_equal "prabhakar+superadmin", @driver.find_element(:css, "span.user_name").text
+  end
 
+  def test_login_failure
+    login_to_site("prabhakar", "welcome")
+    assert_equal "prabhakar+superadmin", @driver.find_element(:css, "span.user_name").text
+  end
 
+  def test_login_screen_after_success
+    login_to_site("prabhakar+superadmin", "welcome")
     # assigning the element object to a local variable menu_dropdown
     menu_dropdown = @driver.find_element(:css, ".icon-sort-down")
     # using the above element variable moving the mouse to that particular element
@@ -85,14 +67,5 @@ class SeleniumTestUnit03122014 < Test::Unit::TestCase
     assert_equal "Change Language", @driver.find_element(:link, "Change Language").text
 
     assert_equal "Log Out", @driver.find_element(:link, "Log Out").text
-
-    #@driver.action.click(el).release.perform
-
-
-=begin
-    profile = @driver.find_element(:css, ".nav_link")
-    # using the above element variable moving the mouse to that particular element
-    @driver.mouse.move_to profile
-=end
   end
 end
