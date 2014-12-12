@@ -1,4 +1,4 @@
-require_relative 'test_helper'
+require 'test_helper'
 
 class SeleniumTestUnit03122014 < Test::Unit::TestCase
   include CommonMethods
@@ -53,7 +53,7 @@ class SeleniumTestUnit03122014 < Test::Unit::TestCase
     @driver.find_element(:css, "button.common-btn").click
 
     wait_for_element(:css, "span.user_name")
-    
+
     assert_equal "prabhakar+superadmin", @driver.find_element(:css, "span.user_name").text
 
 

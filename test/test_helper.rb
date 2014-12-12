@@ -1,4 +1,5 @@
 require 'rubygems'
 require "bundler"
 Bundler.require
-require_relative 'common_methods'
+
+Dir["./test/helpers/**/*.rb"].each {|f| require f}
