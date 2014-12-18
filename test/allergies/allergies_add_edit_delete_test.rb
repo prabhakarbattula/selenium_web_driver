@@ -1,4 +1,4 @@
-require_relative 'test_helper'
+require 'test_helper'
 
 class AllergiesAddEditDeleteTest < Test::Unit::TestCase
   include CommonMethods

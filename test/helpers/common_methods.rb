@@ -1,7 +1,7 @@
 module CommonMethods
   def setup
-    
-    @driver = Selenium::WebDriver.for :firefox          
+
+    @driver = Selenium::WebDriver.for :firefox
     @base_url = "http://caregeneral.net/"
     @accept_next_alert = true
     @driver.manage.timeouts.implicit_wait = 30
@@ -50,7 +50,6 @@ module CommonMethods
     @driver.find_element(:id, "user_password").clear
     @driver.find_element(:id, "user_password").send_keys password
     @driver.find_element(:css, "button.common-btn").click
-    assert_equal "#{username}".split('@').first, @driver.find_element(:css, "span.user_name").text
   end
 
   def login_as_superadmin
@@ -67,5 +66,13 @@ module CommonMethods
 		@driver.mouse.move_to menu_dropdown
 		@driver.find_element(:link, "Log Out").click
 	end
+
+  def find_link_with_text(text)
+    @driver.find_element(:link, text)
+  end
+
+  def assert_link_with_text_present(text)
+    assert_equal text, find_link_with_text(text).text
+  end
 
 end

@@ -1,9 +1,9 @@
-require_relative 'test_helper'
+require 'test_helper'
 
 class CheckingCatchUpTest < Test::Unit::TestCase
 	include CommonMethods
 
-  def test_checking_catch_up
+  def checking_catch_up
 	  login_as_superadmin
     # open | /patients |
     # select | id=select-patient | label=William

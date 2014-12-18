@@ -23,12 +23,8 @@ database:
     # - bundle exec rake db:create db:schema:load --trace
 
 test:
-  minitest_globs:
-    - selenium_web_driver/*_test.rb
   post:
-    #- bundle exec rake setup --trace
-    - bundle exec ruby:
+    - bundle exec rake test:
         parallel: true
         files:
-          - success_login_test.rb
-          - allergies_add_edit_delete_test.rb
+          - test/**/*_test.rb
