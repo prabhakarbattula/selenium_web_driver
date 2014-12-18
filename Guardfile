@@ -10,6 +10,6 @@
 guard :shell do
   watch /.*/ do |m|
     m[0] + " has changed."
-    system("bundle exec ruby #{m[0]}")
+    system("bundle exec ruby -Itest #{m[0]}")
   end
 end
