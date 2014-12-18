@@ -19,12 +19,13 @@ class One < Test::Unit::TestCase
     # click | css=button.common-btn |
     @driver.find_element(:css, "button.common-btn").click
 
+    wait_for_successful_dismiss_element
     # verifyText | css=div.alert.fade.in.alert-danger.alert-dismissable | ×Invalid email or password.
       assert_equal "×\nInvalid email or password.", @driver.find_element(:css, "div.alert.fade.in.alert-danger.alert-dismissable").text
 
     # click | css=button.close |
     @driver.find_element(:css, "button.close").click
-
+    
     # type | id=user_email | neeraj12@bigbinary.com
     @driver.find_element(:id, "user_email").clear
     @driver.find_element(:id, "user_email").send_keys "neeraj12@bigbinary.com"
@@ -36,6 +37,7 @@ class One < Test::Unit::TestCase
     # click | css=button.common-btn |
     @driver.find_element(:css, "button.common-btn").click
 
+    wait_for_successful_dismiss_element
     # verifyText | css=div.alert.fade.in.alert-danger.alert-dismissable | ×Invalid email or password.
       assert_equal "×\nInvalid email or password.", @driver.find_element(:css, "div.alert.fade.in.alert-danger.alert-dismissable").text
 
